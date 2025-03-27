@@ -23,27 +23,49 @@ Before running the tests, ensure the following tools are installed:
 
 ## 3. Project Structure
 automation-framework/
+
 │── core/                    # Shared components for Web and Mobile
-│   ├── api/                 # API clients (e.g., RestAssured)
-│   ├── utils/               # Utilities (e.g., config readers, DB helpers)
-│   ├── web-drivers/         # Selenium WebDriver management
-│   ├── mobile-drivers/      # Appium driver management
-│   ├── reports/             # Reporting tools (e.g., ExtentReports)
-│   ├── pom.xml              # Maven configuration for core
+
+│────── api/                 # API clients (e.g., RestAssured)
+
+│────── utils/               # Utilities (e.g., config readers, DB helpers)
+
+│────── web-drivers/         # Selenium WebDriver management
+
+│────── mobile-drivers/      # Appium driver management
+
+│────── reports/             # Reporting tools (e.g., ExtentReports)
+
+│────── pom.xml              # Maven configuration for core
+
 │
+
 │── test-web-ctflearn/       # Web testing module
-│   ├── pages/               # Page Object Model for web
-│   ├── tests/               # Test cases for web
-│   ├── resources/           # Contains data, report, browser driver
-│   ├── pom.xml              # Maven configuration for web
+
+│────── pages/               # Page Object Model for web
+
+│────── tests/               # Test cases for web
+
+│────── resources/           # Contains data, report, browser driver
+
+│────── pom.xml              # Maven configuration for web
+
 │
+
 │── test-app-finance/        # Mobile testing module
-│   ├── pages/               # Page Object Model for mobile
-│   ├── tests/               # Test cases for mobile
-│   ├── pom.xml              # Maven configuration for mobile
+
+│────── pages/               # Page Object Model for mobile
+
+│────── tests/               # Test cases for mobile
+
+│────── pom.xml              # Maven configuration for mobile
+
 │
+
 │── pom.xml                  # Parent POM for managing modules
+
 │── README.md                # Project documentation
+
 
 
 ## 4. Setting Up the Development Environment
