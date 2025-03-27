@@ -1,0 +1,45 @@
+name: Automation Framework - Test Web Ctflearn Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+     runs-on: windows-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+
+      # Step 3: Install Maven
+      - name: Install Maven
+        run: sudo apt-get install -y maven
+
+      # Step 4: Install dependencies
+      - name: Install Dependencies
+        run: mvn clean install -DskipTests
+
+      # Step 5: Run Tests
+      - name: Run Tests
+        run: mvn test
+
+      # Step 6: Publish Test Report
+      - name: Publish Test Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test-Report
+          path: test-web-ctflearn/target/classes/reports/report.html

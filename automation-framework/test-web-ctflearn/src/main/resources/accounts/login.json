@@ -1,0 +1,6 @@
+{
+    "account_create_challenge": {
+        "username": "<your_username>",
+        "password": "<your_password>"
+    }
+}
