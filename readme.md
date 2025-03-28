@@ -68,6 +68,7 @@ automation-framework/
 
 
 
+
 ## 4. Setting Up the Development Environment
 
 ### 4.1. Tools: Visual Studio Code (VSCode)
@@ -176,7 +177,6 @@ webdriver.remote.url=http://localhost:4444/wd/hub
  * - Ensure consistency between the Chrome version on your machine and the ChromeDriver version you intend to use.
  * - Other browsers may have similar issues; please check their official websites for more details.
  * 
- * Ex: I run with chromedriver 134.0.6998.165 https://storage.googleapis.com/chrome-for-testing-public/134.0.6998.165/win64/chrome-win64.zip
  * Thank you.
  */
 ```
@@ -238,3 +238,130 @@ To execute the test cases for the `test-web-ctflearn` module:
 --- 
 
 By following these steps, you can set up your environment, build the project, and run the web module tests successfully.
+
+
+## 6. Setting Up for Mobile Testing
+
+To perform mobile testing, you need to set up the Android SDK, Appium Inspector, and ADB. Follow the steps below:
+
+### 6.1. Installing Android SDK
+1. **Download Android Studio**:
+    - Download and install Android Studio from [https://developer.android.com/studio](https://developer.android.com/studio).
+
+2. **Install Android SDK**:
+    - Open Android Studio and go to **File** > **Settings** > **Appearance & Behavior** > **System Settings** > **Android SDK**.
+    - Select the required SDK version (e.g., Android 12 or higher) and click **Apply** to install.
+
+3. **Set Environment Variables**:
+    - On Windows:
+      1. Go to **System Properties** > **Environment Variables**.
+      2. Add a new system variable named `ANDROID_HOME` and set its value to the Android SDK installation path (e.g., `C:\Users\<your_user>\AppData\Local\Android\Sdk`).
+      3. Add `%ANDROID_HOME%\platform-tools` and `%ANDROID_HOME%\tools` to the `Path` variable.
+    - On Mac/Linux:
+      ```bash
+      export ANDROID_HOME=/path/to/android/sdk
+      export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+      ```
+
+4. **Verify Installation**:
+    - Open a terminal and run:
+      ```bash
+      adb version
+      ```
+    - You should see the ADB version if the setup is correct.
+
+---
+
+### 6.2. Installing Appium Inspector
+1. **Download Appium Inspector**:
+    - Download the latest version of Appium Inspector from [https://github.com/appium/appium-inspector/releases](https://github.com/appium/appium-inspector/releases).
+
+2. **Install Appium Inspector**:
+    - Follow the installation instructions for your operating system (Windows, Mac, or Linux).
+
+3. **Configure Appium Inspector**:
+    - Open Appium Inspector and configure the desired capabilities for your mobile device or emulator. Example capabilities:
+      ```json
+      {
+        "platformName": "Android",
+        "appium:deviceName": "sdk_gphone64_x86_64",
+        "appium:automationName": "UiAutomator2",
+        "appium:appPackage": "com.binance.dev",
+        "appium:appActivity": ".SplashActivity"
+        }
+      ```
+
+---
+
+### 6.3. Installing ADB (Android Debug Bridge)
+1. **Install ADB**:
+    - ADB is included with the Android SDK. Ensure the `platform-tools` directory is added to your system's `Path` variable.
+
+2. **Verify ADB Installation**:
+    - Open a terminal and run:
+      ```bash
+      adb devices
+      ```
+    - This will list connected devices or emulators.
+
+3. **Common ADB Commands**:
+    - **List connected devices**:
+      ```bash
+      adb devices
+      ```
+    - **Install an APK**:
+    ```bash
+    cd test-app-finance/resources/apps
+    adb install Binance_2.97.10.apk
+    ```
+    - **Start an app**:
+      ```bash
+      adb shell am start -n <package_name>/<activity_name>
+      ```
+    - **Uninstall an app**:
+      ```bash
+      adb uninstall <package_name>
+      ```
+    - **release**
+    ```bash
+      adb shell getprop ro.build.version.release
+      ```
+    **model**
+    ```bash
+      adb shell getprop ro.product.model
+      ```
+### 6.4. Building and Running Appium Server via Command Line
+
+To build and run the Appium server using the command line, follow these steps:
+
+1. **Install Appium**:
+    - Ensure Appium is installed globally using npm:
+        ```bash
+        npm install -g appium
+        ```
+
+2. **Verify Installation**:
+    - Check if Appium is installed correctly:
+        ```bash
+        appium --version
+        ```
+    - This should display the installed Appium version.
+
+3. **Start Appium Server**:
+    - Open a terminal and run the following command to start the Appium server:
+        ```bash
+        appium
+        ```
+    - By default, the server will start on `http://127.0.0.1:4723`.
+
+4. **Start appium with inspector**:
+    - You can customize the server's host, port, and other options using command-line arguments. Example:
+        ```bash
+        appium --use-plugins=inspector --allow-cors
+        ```
+
+5. **Stopping the Server**:
+    - To stop the Appium server, press `Ctrl + C` in the terminal where it is running.
+
+By following these steps, you can build and run the Appium server directly from the command line.
+

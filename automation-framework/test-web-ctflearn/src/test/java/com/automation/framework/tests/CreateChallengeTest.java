@@ -41,7 +41,7 @@ public class CreateChallengeTest extends BaseTest {
     }
 
     @Test(dataProvider = "newChallengeData")
-    public void testCreateChallenge(Challenge newChallenge) {
+    public void testCreateChallengeSuccessfully(Challenge newChallenge) {
         DetailChallengePage detailChallengePage = 
             homePage
                 .clickLoginLink()

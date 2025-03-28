@@ -5,30 +5,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class DriverExtensions {
 
-    public static void openUrl(String url) {
+    private static WebDriver getDriver() {
         WebDriver driver = DriverManager.getDriver();
+        if (driver == null) {
+            throw new IllegalStateException("Appium driver is not initialized.");
+        }
+        return driver;
+    }
+
+    public static void openUrl(String url) {
+        WebDriver driver = getDriver();
         driver.get(url);
         driver.manage().window().maximize();
     }
 
     public static WebElement waitElementVisible(By locator, int waitTime) {
-        WebDriver driver = DriverManager.getDriver();
+        WebDriver driver = getDriver();
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(waitTime));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static boolean waitElementInvisible(By locator, int waitTime) {
-        WebDriver driver = DriverManager.getDriver();
+        WebDriver driver = getDriver();
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(waitTime));
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static WebElement waitElementClickable(By locator, int waitTime) {
-        WebDriver driver = DriverManager.getDriver();
+        WebDriver driver = getDriver();
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(waitTime));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }

@@ -3,6 +3,7 @@ package com.automation.framework.core.elements;
 import com.automation.framework.core.webdrivers.DriverExtensions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import java.util.Optional;
 
 public class WebElementWrapper {
     private By locator;
@@ -15,7 +16,9 @@ public class WebElementWrapper {
 
     public WebElementWrapper(By locator) {
         this.locator = locator;
-        this.waitTime = 30;
+        this.waitTime = Optional.ofNullable(System.getProperty("webdriver.wait.time"))
+            .map(Integer::parseInt)  
+            .orElse(30);
     }
 
     public WebElementWrapper setWaitTime(int waitTime) {
