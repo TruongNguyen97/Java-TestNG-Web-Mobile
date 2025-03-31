@@ -31,6 +31,12 @@
       <version>7.7.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.28</version> <!-- Hoặc phiên bản mới nhất hiện có -->
+      <scope>provided</scope>
+  </dependency>
   </dependencies>
 
   <build>
